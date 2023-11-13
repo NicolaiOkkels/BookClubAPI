@@ -6,7 +6,16 @@ namespace Unit_test
         [Fact]
         public void FailingTest()
         {
-            Assert.False(true); // This test will fail
+            //Assert.False(true); // used to test pipeline for failure
         }
     }
+
+    public class SuccessTest
+{
+    [Fact]
+    public void PassingTest()
+    {
+        Assert.True(true); // This test will pass
+    }
+}
 }
