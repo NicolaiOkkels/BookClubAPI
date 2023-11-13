@@ -1,0 +1,43 @@
+﻿name: .NET CI/CD workflow (Test and Build)
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build BookClubAPI/BookClubAPI.csproj --no-restore
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run tests
+        run: dotnet test Unit-test/Unit-test.csproj --no-restore
